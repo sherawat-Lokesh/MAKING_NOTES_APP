@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Notes App</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="/notes.js"></script>
+  </head>
+  <body style="background-color: #adb5bd; margin: 10px">
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">TITLE</label>
+        <input
+          type="text"
+          class="form-control title"
+          id="exampleInputEmail1"
+          aria-describedby="TITLE"
+        />
+        <div id="emailHelp" class="form-text">TITLE</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Description</label
+        >
+        <input
+          type="text"
+          class="form-control Description"
+          id="exampleInputPassword1"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <div class="parent-row">
+      <div class="row"></div>
+    </div>
+  </body>
+</html>
