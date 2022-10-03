@@ -61,7 +61,7 @@ deleteBtn.forEach((btn) =>{ btn.addEventListener("click", function (e) {
     const btnNum = e.target.dataset.no;
     // console.log(btnNum)
     const filterArr = arr.flat(arr.length)
-    // console.log(filterArr.splice(+btnNum, 1));
+    console.log(filterArr.splice(+btnNum, 1));
   const data=  filterArr.filter((val) =>val);
   // console.log(data)
   arr=[]
@@ -82,7 +82,6 @@ function notesLoadHTML(title, value, index) {
         <button href="#" data-no="${index}" class="btn btn-primary delete">Delete</button>
       </div>
     </div>
-
    `;
   num = index;
   row.insertAdjacentHTML("afterend", html);
