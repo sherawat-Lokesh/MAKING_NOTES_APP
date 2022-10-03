@@ -86,3 +86,6 @@ function notesLoadHTML(title, value, index) {
   num = index;
   row.insertAdjacentHTML("afterend", html);
 }
+const modalBtn=document.querySelector('.modal-btn')
+
+modalBtn.addEventListener

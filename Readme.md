@@ -1,3 +1,3 @@
 #NOTES APP
 
-project link =
+project link = https://notes-sherawat.netlify.app/
