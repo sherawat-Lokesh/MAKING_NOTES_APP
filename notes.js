@@ -7,12 +7,13 @@ const cardTitle = document.querySelector(".title");
 const row = document.querySelector(".row");
 const saveBtn = document.querySelector(".btn-primary");
 
-let arr = [].flat(2);
+let arr = [];
 
 let num = 0;
 saveBtn.addEventListener("click", function (e) {
   e.preventDefault();
   makeNotes();
+  location.reload();
 });
 
 const makeNotes = function (e) {
@@ -25,7 +26,7 @@ const makeNotes = function (e) {
     num: num,
   };
   arr.push(myObj);
-  const arrCopy = arr.flat(num);
+  const arrCopy = arr.flat(arr.length);
   localStorage.setItem("notes", JSON.stringify(arrCopy));
 
   notesLoadHTML(myObj.title, myObj.description, myObj.num);
@@ -39,7 +40,7 @@ const loadLocalStorage =function() {
     //prettier-ignore
     const data = localStorage.getItem("notes")? JSON.parse(localStorage.getItem("notes")): ''
     if(!data)return
-  console.log(data,'local storage data')
+  // console.log(data,'local storage data')
 
     arr.push(data);
     // makeNotes()
@@ -55,13 +56,20 @@ function reloadNotes() {
 
 const deleteBtn = document.querySelectorAll(".delete");
 //prettier-ignore
-deleteBtn.forEach((btn) => btn.addEventListener("click", function (e) {
+deleteBtn.forEach((btn) =>{ btn.addEventListener("click", function (e) {
     e.target.closest(".col-sm-6").remove()
     const btnNum = e.target.dataset.no;
-    console.log(arr.flat(arr.length))
-    const filterArr = arr.flat(arr.length).filter(val=> val.indexof(arr.splice(+btnNum,1)) !==  +btnNum);
-  console.log(filterArr)
-  })
+    // console.log(btnNum)
+    const filterArr = arr.flat(arr.length)
+    // console.log(filterArr.splice(+btnNum, 1));
+  const data=  filterArr.filter((val) =>val);
+  // console.log(data)
+  arr=[]
+  arr.push(data)
+  localStorage.removeItem('notes')
+  localStorage.setItem('notes',JSON.stringify(data))
+  location.reload()
+  })}
 );
 
 function notesLoadHTML(title, value, index) {
