@@ -5,7 +5,7 @@
 const cardDescription = document.querySelector(".Description");
 const cardTitle = document.querySelector(".title");
 const row = document.querySelector(".row");
-const saveBtn = document.querySelector(".btn-primary");
+const saveBtn = document.querySelector(".btn-success");
 
 let arr = [];
 
@@ -79,13 +79,36 @@ function notesLoadHTML(title, value, index) {
       <div class="card-body">
         <h5 class="card-title">${title}</h5>
         <p class="card-text">${value}</p>
-        <button href="#" data-no="${index}" class="btn btn-primary delete">Delete</button>
+        <button href="#" data-no="${index}" class="btn btn-danger delete">Delete</button>
+        <button class="btn btn-primary btn--show-modal" href="#">Edit</button>
       </div>
     </div>
    `;
   num = index;
   row.insertAdjacentHTML("afterend", html);
 }
-const modalBtn=document.querySelector('.modal-btn')
 
-modalBtn.addEventListener
+//creating modal to edit notes again after creating
+
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const btnCloseModal = document.querySelector(".btn--close-modal");
+const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
+
+const useModal = function (e) {
+
+  modal.classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
+};
+
+btnsOpenModal.forEach((val) => val.addEventListener("click", useModal));
+
+btnCloseModal.addEventListener("click", useModal);
+overlay.addEventListener("click", useModal);
+
+document.addEventListener("keydown", function (e) {
+  console.log(e.key);
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+    useModal();
+  }
+});

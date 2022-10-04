@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Notes App</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"
-    ></script>
-    <script defer src="/notes.js"></script>
+<head>
+  <title>Notes App</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
   </head>
-  <body style="background-color: #adb5bd; margin: 10px">
-    <form>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">TITLE</label>
-        <input
-          type="text"
-          class="form-control title"
-          id="exampleInputEmail1"
-          aria-describedby="TITLE"
-        />
-        <div id="emailHelp" class="form-text">TITLE</div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label"
-          >Description</label
-        >
-        <input
-          type="text"
-          class="form-control Description"
-          id="exampleInputPassword1"
-        />
-      </div>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script defer src="/notes.js"></script>
 
-      <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-    <div class="parent-row">
-      <div class="row"></div>
+<body style="background-color: #adb5bd; margin: 10px">
+  <form>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">TITLE</label>
+      <input type="text" class="form-control title" id="exampleInputEmail1" aria-describedby="TITLE" />
+      <div id="emailHelp" class="form-text">TITLE</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Description</label>
+      <input type="text" class="form-control Description" id="exampleInputPassword1" />
     </div>
 
-  </body>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+  <div class="parent-row">
+    <div class="row"></div>
+  </div>
+
+
+
+
+  <!-- modal  -->
+  <div class="modal hidden">
+    <button class="btn--close-modal">&times;</button>
+    <h2 class="modal__header">
+      Open your bank account <br />
+      in just <span class="highlight">5 minutes</span>
+    </h2>
+    <form class="modal__form">
+      <label>First Name</label>
+      <input type="text" />
+      <label>Last Name</label>
+      <input type="text" />
+      <label>Email Address</label>
+      <input type="email" />
+      <button class="btn">Next step &rarr;</button>
+    </form>
+  </div>
+  <div class="overlay hidden"></div>
+</body>
+
 </html>
