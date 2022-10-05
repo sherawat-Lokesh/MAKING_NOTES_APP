@@ -126,11 +126,11 @@ modalBtn.forEach((val) => {
         num: +dataNo,
       };
 
-      console.log(
-        notesDataInModal.title,
-        notesDataInModal.description
-        // notesDataInModal.num
-      );
+      // console.log(
+      //   notesDataInModal.title,
+      //   notesDataInModal.description
+      //   // notesDataInModal.num
+      // );
       // pushing notesDataInModal object in arr before pushing we have to store it and then change and after that push it
 
       const modalArr = arr.flat(arr.length);
@@ -140,9 +140,31 @@ modalBtn.forEach((val) => {
       arr.push(modalArr);
       localStorage.removeItem("notes");
       localStorage.setItem("notes", JSON.stringify(modalArr));
-      location.reload()
+      location.reload();
     });
   });
 });
 
+//making search to search note of particular name etc.
 
+const searchInput = document.querySelector(".search-input");
+const cancelBtn = document.querySelector(".cancel-btn");
+cancelBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  const dataSearch = searchInput.value;
+  // console.log(dataSearch);
+  const flatArr = arr.flat(arr.length);
+  arr = [];
+  const filterNote = flatArr.filter((val) => val.title.match(dataSearch));
+  console.log(filterNote);
+  filterNote.forEach((val, i) => {
+    notesLoadHTML(val.title, val.description, i);
+  });
+
+  console.log(dataSearch);
+  // const localData = JSON.parse(localStorage.getItem("notes"));
+  // arr.push(localData);
+});
+
+//its working good but we can't use search in note because i used locaion.reload in so many function to get latest update data by reloding the page i don't even try to create function of everthing important so i can updated data by using function
+//search functionlity will not work if i try to use this code by reloding the page everytime no. of notes get cloned because keyup check again and by reloding th page for any pressed key
