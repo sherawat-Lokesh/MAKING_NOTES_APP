@@ -8,8 +8,8 @@ const row = document.querySelector(".row");
 const saveBtn = document.querySelector(".btn-success");
 
 let arr = [];
-
 let num = 0;
+
 saveBtn.addEventListener("click", function (e) {
   e.preventDefault();
   makeNotes();
@@ -25,8 +25,10 @@ const makeNotes = function (e) {
     title: cardTitle.value,
     num: num,
   };
+
   arr.push(myObj);
   const arrCopy = arr.flat(arr.length);
+
   localStorage.setItem("notes", JSON.stringify(arrCopy));
 
   notesLoadHTML(myObj.title, myObj.description, myObj.num);
@@ -35,7 +37,7 @@ const makeNotes = function (e) {
 };
 //prettier-ignore
 
-//IFFE for loading data from local storage
+// for loading data from local storage
 const loadLocalStorage =function() {
     //prettier-ignore
     const data = localStorage.getItem("notes")? JSON.parse(localStorage.getItem("notes")): ''
@@ -80,7 +82,8 @@ function notesLoadHTML(title, value, index) {
         <h5 class="card-title">${title}</h5>
         <p class="card-text">${value}</p>
         <button href="#" data-no="${index}" class="btn btn-danger delete">Delete</button>
-        <button class="btn btn-primary btn--show-modal" href="#">Edit</button>
+        <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    data-bs-whatever="@mdo">Edit</button>
       </div>
     </div>
    `;
@@ -88,27 +91,58 @@ function notesLoadHTML(title, value, index) {
   row.insertAdjacentHTML("afterend", html);
 }
 
-//creating modal to edit notes again after creating
+/******creating modal to edit notes again after creating ******/
 
-const modal = document.querySelector(".modal");
-const overlay = document.querySelector(".overlay");
-const btnCloseModal = document.querySelector(".btn--close-modal");
-const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
+//using modal title ,description,and update btn to push every thing
+const modalTitle = document.querySelector(".modal_title");
+const modalDescr = document.querySelector(".modal_description");
+const updateModalBtn = document.querySelector(".Update-btn");
 
-const useModal = function (e) {
+//taking modal btn from js-HTML then using queryselectorAll s
+const modalBtn = document.querySelectorAll(".modal-btn");
+// console.log(modalBtn);
+modalBtn.forEach((val) => {
+  val.addEventListener("click", function (e) {
+    //selecting dataset-no. to find the element in array
+    const dataNo = e.target.closest(".card").querySelector(".delete")
+      .dataset.no;
+    // console.log(+dataNo);
+    // getting value from array on edit button click and the value will be passed to modal input tag /\
+    const noteData = arr.flat(arr.length).forEach((val, i) => {
+      if (i === +dataNo) {
+        // console.log(val.title, val.description);
+        modalTitle.value = val.title;
+        modalDescr.textContent = val.description;
+      }
+    });
 
-  modal.classList.toggle("hidden");
-  overlay.classList.toggle("hidden");
-};
+    //using event listner on update btn for pushing the changed data to notesDataInModal then pass it
+    updateModalBtn.addEventListener("click", function (e) {
+      //object created to get modal title and description
+      if (!modalTitle.value && !modalDescr.value) return;
+      const notesDataInModal = {
+        title: modalTitle.value,
+        description: modalDescr.value,
+        num: +dataNo,
+      };
 
-btnsOpenModal.forEach((val) => val.addEventListener("click", useModal));
+      console.log(
+        notesDataInModal.title,
+        notesDataInModal.description
+        // notesDataInModal.num
+      );
+      // pushing notesDataInModal object in arr before pushing we have to store it and then change and after that push it
 
-btnCloseModal.addEventListener("click", useModal);
-overlay.addEventListener("click", useModal);
-
-document.addEventListener("keydown", function (e) {
-  console.log(e.key);
-  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-    useModal();
-  }
+      const modalArr = arr.flat(arr.length);
+      modalArr.splice(+dataNo, 1, notesDataInModal);
+      console.log(modalArr);
+      arr = [];
+      arr.push(modalArr);
+      localStorage.removeItem("notes");
+      localStorage.setItem("notes", JSON.stringify(modalArr));
+      location.reload()
+    });
+  });
 });
+
+
